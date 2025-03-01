@@ -1,8 +1,10 @@
 package com.example.restful.api.controller;
 
+import com.example.restful.api.error.ErrorResponse;
 import com.example.restful.api.model.User;
 import com.example.restful.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,16 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PostMapping
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        try {
+            User registeredUser = userService.registerUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(e.getMessage()));
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         User updatedUser = userService.updateUser(id, userDetails);
@@ -45,5 +57,4 @@ public class UserController {
         User deletedUser = userService.deleteUser(id);
         return ResponseEntity.ok(deletedUser);
     }
-
 }

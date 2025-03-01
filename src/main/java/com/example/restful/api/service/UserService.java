@@ -22,6 +22,15 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public User registerUser(User user) {
+        if(userRepository.existsByUsername(user.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
+        user.hashPassword();
+        user.setStatus(1);
+        return userRepository.save(user);
+    }
+
     public User updateUser(Long id, User userDetails) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
