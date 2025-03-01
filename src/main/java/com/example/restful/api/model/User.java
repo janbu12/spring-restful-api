@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Data
@@ -19,8 +20,14 @@ public class User {
     private Long user_id;
 
     private String username;
+
     private String password;
+
     private String namalengkap;
+
     private String notelepon;
+
     private String alamat;
+
+    private Integer status;
 }

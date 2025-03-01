@@ -98,3 +98,7 @@ INSERT INTO `rent_details` (`id_peminjaman`, `produk_id`, `jumlah`, `subtotal`) 
   (4081, 2, 2, 300000),
   (4080, 1, 1, 250000),
   (4081, 2, 1, 150000);
+
+ALTER TABLE `users`
+
+ADD COLUMN `status` boolean NOT NULL DEFAULT 1;

@@ -15,7 +15,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllByStatus(1);
     }
 
     public Optional<User> getUserById(Long id) {
@@ -32,6 +32,17 @@ public class UserService {
         user.setNotelepon(userDetails.getNotelepon());
         user.setAlamat(userDetails.getAlamat());
 
+        return userRepository.save(user);
+    }
+
+    public Optional<User> getUserByUsername(String username){
+        return userRepository.findUserByUsername(username);
+    }
+
+    public User deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        user.setStatus(0);
         return userRepository.save(user);
     }
 }

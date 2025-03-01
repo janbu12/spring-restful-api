@@ -27,9 +27,23 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/username/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        return userService.getUserByUsername(username)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         User updatedUser = userService.updateUser(id, userDetails);
         return ResponseEntity.ok(updatedUser);
     }
+
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+        User deletedUser = userService.deleteUser(id);
+        return ResponseEntity.ok(deletedUser);
+    }
+
 }
