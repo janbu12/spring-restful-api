@@ -1,7 +1,7 @@
 package com.example.restful.api.controller;
 
 import com.example.restful.api.error.ErrorResponse;
-import com.example.restful.api.model.User;
+import com.example.restful.api.entity.User;
 import com.example.restful.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

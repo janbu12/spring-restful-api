@@ -1,17 +1,14 @@
-package com.example.restful.api.model;
+package com.example.restful.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
@@ -22,11 +19,12 @@ public class User {
     private Long user_id;
 
     @NotNull
-    @Size(min = 5, max = 20)
+    @Size(max = 255)
     @Column(unique = true)
     private String username;
 
     @NotNull
+    @Size(max = 255)
     private String password;
 
     @NotNull
@@ -39,9 +37,4 @@ public class User {
     private String alamat;
 
     private Integer status;
-
-    public void hashPassword() {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(this.password);
-    }
 }

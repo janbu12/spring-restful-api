@@ -1,9 +1,13 @@
 package com.example.restful.api.service;
 
-import com.example.restful.api.model.User;
+import com.example.restful.api.entity.User;
+import com.example.restful.api.model.RegisterUserRequest;
 import com.example.restful.api.repository.UserRepository;
+import com.example.restful.api.security.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,21 +18,32 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ValidationService validationService;
+
+    public void registerUser(RegisterUserRequest request) {
+        validationService.validate(request);
+
+        if(userRepository.existsByUsername(request.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+        }
+
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
+        user.setNamalengkap(request.getNamalengkap());
+        user.setNotelepon(request.getNotelepon());
+        user.setAlamat(request.getAlamat());
+        user.setStatus(1);
+        userRepository.save(user);
+    }
+
     public List<User> getAllUsers() {
         return userRepository.findAllByStatus(1);
     }
 
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
-    }
-
-    public User registerUser(User user) {
-        if(userRepository.existsByUsername(user.getUsername())) {
-            throw new RuntimeException("Username already exists");
-        }
-        user.hashPassword();
-        user.setStatus(1);
-        return userRepository.save(user);
     }
 
     public User updateUser(Long id, User userDetails) {

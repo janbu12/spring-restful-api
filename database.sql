@@ -102,3 +102,10 @@ INSERT INTO `rent_details` (`id_peminjaman`, `produk_id`, `jumlah`, `subtotal`) 
 ALTER TABLE `users`
 
 ADD COLUMN `status` boolean NOT NULL DEFAULT 1;
+
+ALTER TABLE `users`
+ADD COLUMN `token` VARCHAR(255);
+
+ALTER TABLE `users`
+
+ADD COLUMN `token_expired_at` BIGINT;
