@@ -2,9 +2,12 @@ package com.example.restful.api.controller;
 
 import com.example.restful.api.error.ErrorResponse;
 import com.example.restful.api.entity.User;
+import com.example.restful.api.model.RegisterUserRequest;
+import com.example.restful.api.model.WebResponse;
 import com.example.restful.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,14 +39,13 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        try {
-            User registeredUser = userService.registerUser(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(e.getMessage()));
-        }
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<String> registerUser(@RequestBody RegisterUserRequest request) {
+        userService.registerUser(request);
+        return WebResponse.<String>builder().data("Created").build();
     }
 
     @PutMapping("/{id}")

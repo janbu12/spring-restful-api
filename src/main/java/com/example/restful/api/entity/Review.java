@@ -3,7 +3,7 @@ package com.example.restful.api.entity;
 import jakarta.persistence.Entity;
 import lombok.*;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @AllArgsConstructor
