@@ -1,7 +1,10 @@
 package com.example.restful.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,4 +21,8 @@ public class Category {
 
     @Column(name="nama_kategori")
     private String categoryName;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Product> products;
 }

@@ -1,5 +1,6 @@
 package com.example.restful.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,7 +43,8 @@ public class Product {
     @Column(name="kategori_id")
     private Integer categoryId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "kategori_id", insertable = false, updatable = false)
-//    private Category category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "kategori_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private Category category;
 }
