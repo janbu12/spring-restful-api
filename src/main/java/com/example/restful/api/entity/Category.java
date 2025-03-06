@@ -8,12 +8,13 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="categories")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="kategori_id")
-    private Long id;
+    private Integer id;
 
     @Column(name="nama_kategori")
     private String categoryName;

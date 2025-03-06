@@ -10,12 +10,13 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="products")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="product_id")
-    private Long id;
+    @Column(name="produk_id")
+    private Integer id;
 
     @Column(name="nama_produk")
     private String name;
@@ -39,9 +40,9 @@ public class Product {
     private Date updatedAt;
 
     @Column(name="kategori_id")
-    private Long categoryId;
+    private Integer categoryId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "kategori_id", insertable = false, updatable = false)
-    private Category category;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "kategori_id", insertable = false, updatable = false)
+//    private Category category;
 }
