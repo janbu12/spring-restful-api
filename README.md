@@ -1,6 +1,6 @@
 # Javadocs
 
-Javadocs path is 
+Javadocs path is [click here](https://github.com/janbu12/spring-restful-api/tree/main/docs) or
 ```
 /docs
 ```
