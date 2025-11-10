@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.example.restful.api.controller","l":"ErrorController"},{"p":"com.example.restful.api.controller","l":"ProductController"},{"p":"com.example.restful.api.controller","l":"UserController"},{"p":"com.example.restful.api.service","l":"UserService"}];updateSearchResults();

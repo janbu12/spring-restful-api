@@ -1,3 +1,10 @@
+# Javadocs
+
+Javadocs path is 
+```
+/docs
+```
+
 # Getting Started
 
 ### Reference Documentation
